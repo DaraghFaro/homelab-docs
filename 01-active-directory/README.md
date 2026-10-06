@@ -60,7 +60,7 @@ Checked the domain with `Get-ADDomain` and `dcdiag`, and confirmed DC01 now uses
 
 ### dcdiag failed test: SystemLog (WinRM SPN registration)
 - **Symptom:** `dcdiag` reported `failed test SystemLog`. The log showed that the WinRM service failed to create the SPNs `WSMAN/DC01.corp.lan` and `WSMAN/DC01`. Every other test passed.
-- **Cause:** WinRM tried to register its SPNs during promotion, before Active Directory had finished starting.
+- **Likely cause:** WinRM tried to register its SPNs during promotion, before Active Directory had finished starting.
 - **Diagnosis:** `setspn -L DC01` showed no WSMAN entries. Restarting the WinRM service did not register them.
 - **Fix:** Registered them manually:
 ```
